@@ -2,9 +2,9 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:mini_project_news/constant/text_style_constant.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:mini_project_news/view/home_page.dart';
+import 'package:mini_project_news/widget/custom_title_text.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -19,7 +19,7 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
 
     Timer(const Duration(seconds: 2), () {
-      Navigator.push(
+      Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) => const HomePage()));
     });
   }
@@ -37,10 +37,7 @@ class _SplashScreenState extends State<SplashScreen> {
               width: double.infinity,
             ),
             const SizedBox(height: 20),
-            Text(
-              "What'sNEWS",
-              style: TextStyleConstant.oswaldBold,
-            ),
+            CustomTextTitle(),
             const SizedBox(height: 20),
             const SpinKitWave(
               color: Colors.blue,

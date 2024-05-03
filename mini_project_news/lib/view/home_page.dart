@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mini_project_news/constant/text_style_constant.dart';
+import 'package:mini_project_news/widget/custom_category_list_view.dart';
+import 'package:mini_project_news/widget/custom_title_text.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -13,8 +14,14 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('WhatsNEWS', style: TextStyleConstant.oswaldBold,),
+        title: CustomTextTitle(),
         centerTitle: true,
+        elevation: 0,
+      ),
+      body: Column(
+        children: [
+          CustomCategory(),
+        ],
       ),
     );
   }

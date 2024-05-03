@@ -7,4 +7,16 @@ class TextStyleConstant{
     color: Colors.black,
     fontWeight: FontWeight.bold,
   );
+
+  static TextStyle latoBold = GoogleFonts.lato(
+    fontSize: 15,
+    color: Colors.black,
+    fontWeight: FontWeight.bold,
+  );
+
+  static TextStyle latoReg = GoogleFonts.lato(
+    fontSize: 14,
+    color: Colors.black,
+    fontWeight: FontWeight.w400,
+  );
 }
