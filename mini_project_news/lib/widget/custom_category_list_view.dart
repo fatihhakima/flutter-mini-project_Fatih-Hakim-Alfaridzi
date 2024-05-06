@@ -55,6 +55,7 @@ class CustomCategory extends StatefulWidget {
 
 class _CustomCategoryState extends State<CustomCategory> {
   List<CustomCategoryModel> categories = [];
+
   @override
   void initState() {
     categories = getCategories();
@@ -64,7 +65,7 @@ class _CustomCategoryState extends State<CustomCategory> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(left: 16),
+      margin: EdgeInsets.only(left: 8),
       height: 80,
       child: ListView.builder(
         shrinkWrap: true,
@@ -91,7 +92,7 @@ class CustomCategoryTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(right: 16),
+      margin: EdgeInsets.only(right: 8),
       child: Stack(
         children: [
           ClipRRect(
