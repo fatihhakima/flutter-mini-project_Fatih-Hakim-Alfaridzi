@@ -1,7 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:mini_project_news/constant/text_style_constant.dart';
-import 'package:mini_project_news/model/custom_carousel_slider_model.dart';
+import 'package:mini_project_news/constant/constant_text_style.dart';
+import 'package:mini_project_news/model/model_custom_carousel_slider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 List<CustomSliderModel> getSliders() {
@@ -118,7 +118,7 @@ class _CustomCarouselSliderState extends State<CustomCarouselSlider> {
               ),
               child: Text(
                 sliderName,
-                style: TextStyleConstant.latoBold
+                style: ConstantTextStyle.latoBold
                     .copyWith(color: Colors.white, fontSize: 18),
               ),
             )

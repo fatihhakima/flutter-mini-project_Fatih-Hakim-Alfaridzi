@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mini_project_news/constant/text_style_constant.dart';
+import 'package:mini_project_news/constant/constant_text_style.dart';
 
 class CustomTextTitle extends StatelessWidget {
   const CustomTextTitle({super.key});
@@ -11,11 +11,11 @@ class CustomTextTitle extends StatelessWidget {
       children: [
         Text(
           "What's",
-          style: TextStyleConstant.oswaldBold,
+          style: ConstantTextStyle.oswaldBold,
         ),
         Text(
           'NEWS',
-          style: TextStyleConstant.oswaldBold.copyWith(
+          style: ConstantTextStyle.oswaldBold.copyWith(
             color: Colors.blue,
           ),
         )

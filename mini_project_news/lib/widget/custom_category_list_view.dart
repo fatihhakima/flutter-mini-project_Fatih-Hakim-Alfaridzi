@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:mini_project_news/constant/text_style_constant.dart';
-import 'package:mini_project_news/model/custom_category_model.dart';
+import 'package:mini_project_news/constant/constant_text_style.dart';
+import 'package:mini_project_news/model/model_custom_category.dart';
 
 List<CustomCategoryModel> getCategories() {
   List<CustomCategoryModel> category = [];
@@ -114,7 +114,7 @@ class CustomCategoryTile extends StatelessWidget {
             child: Center(
               child: Text(
                 categoryTileName,
-                style: TextStyleConstant.latoBold.copyWith(color: Colors.white),
+                style: ConstantTextStyle.latoBold.copyWith(color: Colors.white),
               ),
             ),
           ),
