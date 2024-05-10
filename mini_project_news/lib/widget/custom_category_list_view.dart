@@ -18,11 +18,6 @@ List<CustomCategoryModel> getCategories() {
   category.add(customCategoryModel);
   customCategoryModel = new CustomCategoryModel();
 
-  customCategoryModel.categoryName = 'General';
-  customCategoryModel.categoryImage = 'assets/general.png';
-  category.add(customCategoryModel);
-  customCategoryModel = new CustomCategoryModel();
-
   customCategoryModel.categoryName = 'Health';
   customCategoryModel.categoryImage = 'assets/health.png';
   category.add(customCategoryModel);

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mini_project_news/widget/custom_carousel_slider.dart';
+import 'package:mini_project_news/widget/custom_news_carousel_slider.dart';
 import 'package:mini_project_news/widget/custom_category_list_view.dart';
 import 'package:mini_project_news/widget/custom_news_article_list_view.dart';
 import 'package:mini_project_news/widget/custom_section_subtitle.dart';
