@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mini_project_news/constant/constant_text_style.dart';
 import 'package:mini_project_news/model/model_news_article.dart';
 import 'package:mini_project_news/services/service_news_article.dart';
+import 'package:mini_project_news/view/news_view_page.dart';
 
 class CustomNewsArticleListView extends StatefulWidget {
   const CustomNewsArticleListView({super.key});
@@ -49,7 +50,11 @@ class _CustomNewsArticleListViewState extends State<CustomNewsArticleListView> {
 
   Widget CardNewsArticle(ModelNewsArticle newsArticle) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => NewsViewPage(newsUrl: newsArticle.url ?? ''),
+        ));
+      },
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 10),
         child: Card(
