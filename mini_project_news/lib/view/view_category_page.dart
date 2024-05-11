@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:mini_project_news/constant/constant_text_style.dart';
 import 'package:mini_project_news/model/model_news_category.dart';
 import 'package:mini_project_news/services/service_news_category.dart';
@@ -51,7 +50,7 @@ class _ViewCategoryPageState extends State<ViewCategoryPage> {
           future: _newsCategoryFuture,
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(
+              return const Center(
                 child: CircularProgressIndicator(),
               );
             } else if (snapshot.hasError) {
@@ -64,10 +63,11 @@ class _ViewCategoryPageState extends State<ViewCategoryPage> {
                 itemCount: newsCategories.length,
                 itemBuilder: (context, index) {
                   return ShowCategoryNewsArticle(
-                      categoryNewsImage: newsCategories[index].urlToImage,
-                      categoryNewsTitle: newsCategories[index].title,
-                      categoryNewsDesc: newsCategories[index].description,
-                      categoryNewsUrl: newsCategories[index].url,);
+                    categoryNewsImage: newsCategories[index].urlToImage,
+                    categoryNewsTitle: newsCategories[index].title,
+                    categoryNewsDesc: newsCategories[index].description,
+                    categoryNewsUrl: newsCategories[index].url,
+                  );
                 },
               );
             }
@@ -94,27 +94,38 @@ class ShowCategoryNewsArticle extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => ViewNewsPage(newsUrl: categoryNewsUrl ?? ''),));
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) =>
+                  ViewNewsPage(newsUrl: categoryNewsUrl ?? ''),
+            ));
       },
       child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 10),
+        margin: const EdgeInsets.symmetric(horizontal: 10),
         child: Column(
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(8),
-              child: CachedNetworkImage(
-                imageUrl: categoryNewsImage ?? '',
-                width: MediaQuery.of(context).size.width,
-                height: 200,
-                fit: BoxFit.cover,
-              ),
+              child: categoryNewsImage!.isNotEmpty
+                  ? CachedNetworkImage(
+                      imageUrl: categoryNewsImage ?? '',
+                      placeholder: (context, url) =>
+                          const CircularProgressIndicator(),
+                      errorWidget: (context, url, error) =>
+                          const Icon(Icons.error),
+                      width: MediaQuery.of(context).size.width,
+                      height: 200,
+                      fit: BoxFit.cover,
+                    )
+                  : Image.asset('assets/image_error_placeholder.png'),
             ),
             Text(
               categoryNewsTitle ?? '',
               style: ConstantTextStyle.latoBold.copyWith(fontSize: 16),
               maxLines: 2,
             ),
-            SizedBox(
+            const SizedBox(
               height: 4,
             ),
             Text(
@@ -122,7 +133,7 @@ class ShowCategoryNewsArticle extends StatelessWidget {
               style: ConstantTextStyle.latoReg.copyWith(fontSize: 14),
               maxLines: 3,
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
           ],

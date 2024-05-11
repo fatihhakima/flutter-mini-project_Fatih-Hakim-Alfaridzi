@@ -10,7 +10,7 @@ class CustomSectionSubtitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 10),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -20,7 +20,7 @@ class CustomSectionSubtitle extends StatelessWidget {
           ),
           TextButton(
             onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => ViewAllArticlesPage(),));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const ViewAllArticlesPage(),));
             },
             child: Text(
               'View All',

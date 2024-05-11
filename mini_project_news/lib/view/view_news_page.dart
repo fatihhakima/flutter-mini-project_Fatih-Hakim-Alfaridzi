@@ -32,7 +32,7 @@ class _ViewNewsPageState extends State<ViewNewsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: CustomTextTitle(),
+        title: const CustomTextTitle(),
         centerTitle: true,
         elevation: 0,
         ),

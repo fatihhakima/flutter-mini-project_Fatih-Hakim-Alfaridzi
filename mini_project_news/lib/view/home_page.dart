@@ -20,13 +20,13 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: CustomTextTitle(),
+        title: const CustomTextTitle(),
         centerTitle: true,
         elevation: 0,
       ),
       body: Stack(
         children: [
-          SingleChildScrollView(
+          const SingleChildScrollView(
             child: Column(
               children: [
                 CustomCarouselSlider(),
@@ -44,7 +44,6 @@ class _HomePageState extends State<HomePage> {
               currentIndexNavigation: _currentIndex,
               onTap: (index) => setState(() {
                 _currentIndex = index;
-                print(index);
               }),
             ),
           )

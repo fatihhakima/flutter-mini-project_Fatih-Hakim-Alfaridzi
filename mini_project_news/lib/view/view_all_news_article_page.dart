@@ -46,7 +46,7 @@ class _ViewAllArticlesPageState extends State<ViewAllArticlesPage> {
         future: _newsArticleFuture,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(),
             );
           } else if (snapshot.hasError) {
@@ -98,28 +98,36 @@ class ShowAllNewsArticle extends StatelessWidget {
         Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => ViewNewsPage(newsUrl: allNewsArticleUrl ?? '',),
+              builder: (context) => ViewNewsPage(
+                newsUrl: allNewsArticleUrl ?? '',
+              ),
             ));
       },
       child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 10),
+        margin: const EdgeInsets.symmetric(horizontal: 10),
         child: Column(
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(8),
-              child: CachedNetworkImage(
-                imageUrl: allNewsArticleImage ?? '',
-                width: MediaQuery.of(context).size.width,
-                height: 200,
-                fit: BoxFit.cover,
-              ),
+              child: allNewsArticleImage!.isNotEmpty
+                  ? CachedNetworkImage(
+                      imageUrl: allNewsArticleImage ?? '',
+                      placeholder: (context, url) =>
+                          const CircularProgressIndicator(),
+                      errorWidget: (context, url, error) =>
+                          const Icon(Icons.error),
+                      width: MediaQuery.of(context).size.width,
+                      height: 200,
+                      fit: BoxFit.cover,
+                    )
+                  : Image.asset('assets/image_error_placeholder.png'),
             ),
             Text(
               allNewsArticleTitle ?? '',
               style: ConstantTextStyle.latoBold.copyWith(fontSize: 16),
               maxLines: 2,
             ),
-            SizedBox(
+            const SizedBox(
               height: 4,
             ),
             Text(
@@ -127,7 +135,7 @@ class ShowAllNewsArticle extends StatelessWidget {
               style: ConstantTextStyle.latoReg.copyWith(fontSize: 14),
               maxLines: 3,
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
           ],

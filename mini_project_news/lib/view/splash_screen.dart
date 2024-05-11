@@ -1,7 +1,5 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:mini_project_news/view/home_page.dart';
 import 'package:mini_project_news/widget/custom_title_text.dart';
@@ -37,6 +35,7 @@ class _SplashScreenState extends State<SplashScreen> {
               width: double.infinity,
             ),
             const SizedBox(height: 20),
+            // ignore: prefer_const_constructors
             CustomTextTitle(),
             const SizedBox(height: 20),
             const SpinKitWave(

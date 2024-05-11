@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:mini_project_news/constant/constant_text_style.dart';
@@ -30,7 +31,7 @@ class _CustomCarouselSliderState extends State<CustomCarouselSlider> {
         future: _newsSliderFuture,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return CircularProgressIndicator();
+            return const CircularProgressIndicator();
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
           } else {
@@ -47,7 +48,8 @@ class _CustomCarouselSliderState extends State<CustomCarouselSlider> {
                   height: 300,
                   autoPlay: true,
                   enlargeCenterPage: false,
-                  viewportFraction: 1, // untuk mengubah jumlah gambar yang ditampilkan pada slider
+                  viewportFraction:
+                      1, // untuk mengubah jumlah gambar yang ditampilkan pada slider
                   // enlargeStrategy: CenterPageEnlargeStrategy.height,
                   onPageChanged: (index, reason) {
                     setState(() {
@@ -56,14 +58,15 @@ class _CustomCarouselSliderState extends State<CustomCarouselSlider> {
                   },
                 ),
               ),
-              SizedBox(height: 14),
+              const SizedBox(height: 14),
               buildSliderIndicator(sliders.length),
             ]);
           }
         });
   }
 
-  Widget buildSliderImage(String sliderImage, int index, String sliderName, List<ModelNewsSlider> sliders) =>
+  Widget buildSliderImage(String sliderImage, int index, String sliderName,
+          List<ModelNewsSlider> sliders) =>
       GestureDetector(
         onTap: () {
           Navigator.push(
@@ -80,20 +83,26 @@ class _CustomCarouselSliderState extends State<CustomCarouselSlider> {
               ClipRRect(
                 borderRadius: BorderRadius.circular(0),
                 child: Container(
-                  child: Image.network(
-                    sliderImage,
-                    height: 300, //300
-                    fit: BoxFit.cover,
-                    width: MediaQuery.of(context).size.width,
-                  ),
+                  child: sliderImage.isNotEmpty
+                      ? CachedNetworkImage(
+                          imageUrl: sliderImage,
+                          placeholder: (context, url) =>
+                              const CircularProgressIndicator(),
+                          errorWidget: (context, url, error) =>
+                              const Icon(Icons.error),
+                          height: 300, //300
+                          fit: BoxFit.cover,
+                          width: MediaQuery.of(context).size.width,
+                        )
+                      : Image.asset('assets/image_error_placeholder.png'),
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(top: 220),
-                padding: EdgeInsets.symmetric(horizontal: 10),
+                margin: const EdgeInsets.only(top: 220),
+                padding: const EdgeInsets.symmetric(horizontal: 10),
                 height: 300, //300
                 width: MediaQuery.of(context).size.width,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: Colors.black38,
                   borderRadius:
                       BorderRadius.only(bottomLeft: Radius.circular(0)),
@@ -113,7 +122,7 @@ class _CustomCarouselSliderState extends State<CustomCarouselSlider> {
   Widget buildSliderIndicator(int itemCount) => AnimatedSmoothIndicator(
         activeIndex: activeIndexSlider,
         count: 5, //itemCount
-        effect: WormEffect(
+        effect: const WormEffect(
           dotWidth: 10,
           dotHeight: 10,
           activeDotColor: Colors.blue,

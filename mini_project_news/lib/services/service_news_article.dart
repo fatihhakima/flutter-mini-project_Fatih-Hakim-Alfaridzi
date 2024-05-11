@@ -15,9 +15,6 @@ class ServiceNewsArticle {
 
       final response = await _dio.get(url);
 
-      print('Response Status Code: ${response.statusCode}');
-      print('Response Data: ${response.data}');
-
       if (response.statusCode == 200) {
         final List<dynamic> jsonResponse = response.data['articles']; // 'articles' merupakan key atau kata kunci dari responsenya
         final List<ModelNewsArticle> newsArticles = jsonResponse

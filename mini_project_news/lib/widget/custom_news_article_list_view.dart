@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:mini_project_news/constant/constant_text_style.dart';
 import 'package:mini_project_news/model/model_news_article.dart';
@@ -28,14 +29,14 @@ class _CustomNewsArticleListViewState extends State<CustomNewsArticleListView> {
       future: _newsArticleFuture,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         } else if (snapshot.hasError) {
           return Center(child: Text('Error: ${snapshot.error}'));
         } else if (snapshot.hasData) {
           List<ModelNewsArticle> newsArticle = snapshot.data!;
           return ListView.builder(
               shrinkWrap: true,
-              physics: ClampingScrollPhysics(),
+              physics: const ClampingScrollPhysics(),
               itemCount: newsArticle.length,
               itemBuilder: (context, index) {
                 return CardNewsArticle(newsArticle[index]);
@@ -57,26 +58,32 @@ class _CustomNewsArticleListViewState extends State<CustomNewsArticleListView> {
         ));
       },
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 10),
         child: Card(
           surfaceTintColor: Colors.white,
           elevation: 3,
           child: Padding(
-            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 6),
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 6),
             child: Row(
               children: [
                 Container(
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(8),
-                    child: Image.network(
-                      newsArticle.urlToImage ?? '',
-                      height: 120,
-                      width: 120,
-                      fit: BoxFit.cover,
-                    ),
+                    child: newsArticle.urlToImage!.isNotEmpty
+                        ? CachedNetworkImage(
+                            imageUrl: newsArticle.urlToImage ?? '',
+                            placeholder: (context, url) =>
+                                const CircularProgressIndicator(),
+                            errorWidget: (context, url, error) =>
+                                const Icon(Icons.error),
+                            height: 120,
+                            width: 120,
+                            fit: BoxFit.cover,
+                          )
+                        : Image.asset('assets/image_error_placeholder.png'),
                   ),
                 ),
-                SizedBox(width: 8),
+                const SizedBox(width: 8),
                 Column(
                   children: [
                     Container(
@@ -89,7 +96,7 @@ class _CustomNewsArticleListViewState extends State<CustomNewsArticleListView> {
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     Container(
                       width: MediaQuery.of(context).size.width / 1.8,
                       child: Text(

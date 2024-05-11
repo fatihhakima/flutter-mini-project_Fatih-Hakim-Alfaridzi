@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:mini_project_news/constant/constant_text_style.dart';
 import 'package:mini_project_news/model/model_custom_category.dart';
 import 'package:mini_project_news/view/view_category_page.dart';
@@ -61,7 +59,7 @@ class _CustomCategoryState extends State<CustomCategory> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(left: 8),
+      margin: const EdgeInsets.only(left: 8),
       height: 80,
       child: ListView.builder(
         shrinkWrap: true,
@@ -92,7 +90,7 @@ class CustomCategoryTile extends StatelessWidget {
         Navigator.push(context, MaterialPageRoute(builder: (context) => ViewCategoryPage(category: categoryTileName),));
       },
       child: Container(
-        margin: EdgeInsets.only(right: 8),
+        margin: const EdgeInsets.only(right: 8),
         child: Stack(
           children: [
             ClipRRect(

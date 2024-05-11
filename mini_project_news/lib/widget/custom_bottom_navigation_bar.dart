@@ -18,10 +18,10 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
   void _onItemTapped(int index) {
      switch (index) {
       case 0:
-       Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => HomePage(),));
+       Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const HomePage(),));
        break;
        case 1:
-       Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => SearchPage(),));
+       Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const SearchPage(),));
       break;
        case 2:
        // Navigator.of(context).push(MaterialPageRoute(builder: (context) => HomePage(),));
@@ -33,23 +33,23 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
   Widget build(BuildContext context) {
     return Card(
       elevation: 6,
-      margin: EdgeInsets.all(16),
+      margin: const EdgeInsets.all(16),
       surfaceTintColor: Colors.white,
       // color: Colors.white,
       child: SalomonBottomBar(
-        duration: Duration(seconds: 1),
+        duration: const Duration(seconds: 1),
         items: [
           SalomonBottomBarItem(
-              icon: Icon(Icons.home),
-              title: Text('Home'),
+              icon: const Icon(Icons.home),
+              title: const Text('Home'),
               selectedColor: Colors.blue),
           SalomonBottomBarItem(
-              icon: Icon(Icons.search),
-              title: Text('Search'),
+              icon: const Icon(Icons.search),
+              title: const Text('Search'),
               selectedColor: Colors.blue),
           SalomonBottomBarItem(
-              icon: Icon(Icons.android),
-              title: Text('AI'),
+              icon: const Icon(Icons.android),
+              title: const Text('AI'),
               selectedColor: Colors.blue),
         ],
         currentIndex: widget.currentIndexNavigation,
