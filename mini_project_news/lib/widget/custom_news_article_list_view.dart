@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mini_project_news/constant/constant_text_style.dart';
 import 'package:mini_project_news/model/model_news_article.dart';
 import 'package:mini_project_news/services/service_news_article.dart';
-import 'package:mini_project_news/view/news_view_page.dart';
+import 'package:mini_project_news/view/view_news_page.dart';
 
 class CustomNewsArticleListView extends StatefulWidget {
   const CustomNewsArticleListView({super.key});
@@ -25,34 +25,35 @@ class _CustomNewsArticleListViewState extends State<CustomNewsArticleListView> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<ModelNewsArticle>>(
-        future: _newsArticleFuture,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
-          } else if (snapshot.hasError) {
-            return Center(child: Text('Error: ${snapshot.error}'));
-          } else if (snapshot.hasData) {
-            List<ModelNewsArticle> newsArticle = snapshot.data!;
-            return ListView.builder(
-                shrinkWrap: true,
-                physics: ClampingScrollPhysics(),
-                itemCount: newsArticle.length,
-                itemBuilder: (context, index) {
-                  return CardNewsArticle(newsArticle[index]);
-                });
-          } else {
-            return const Center(
-              child: Text('No Data Available'),
-            );
-          }
-        });
+      future: _newsArticleFuture,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Center(child: CircularProgressIndicator());
+        } else if (snapshot.hasError) {
+          return Center(child: Text('Error: ${snapshot.error}'));
+        } else if (snapshot.hasData) {
+          List<ModelNewsArticle> newsArticle = snapshot.data!;
+          return ListView.builder(
+              shrinkWrap: true,
+              physics: ClampingScrollPhysics(),
+              itemCount: newsArticle.length,
+              itemBuilder: (context, index) {
+                return CardNewsArticle(newsArticle[index]);
+              });
+        } else {
+          return const Center(
+            child: Text('No Data Available'),
+          );
+        }
+      },
+    );
   }
 
   Widget CardNewsArticle(ModelNewsArticle newsArticle) {
     return GestureDetector(
       onTap: () {
         Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => NewsViewPage(newsUrl: newsArticle.url ?? ''),
+          builder: (context) => ViewNewsPage(newsUrl: newsArticle.url ?? ''),
         ));
       },
       child: Padding(

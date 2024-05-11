@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:mini_project_news/widget/custom_title_text.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-class NewsViewPage extends StatefulWidget {
+class ViewNewsPage extends StatefulWidget {
   final String newsUrl;
 
-  const NewsViewPage({super.key, required this.newsUrl});
+  const ViewNewsPage({super.key, required this.newsUrl});
 
   @override
-  State<NewsViewPage> createState() => _NewsViewPageState();
+  State<ViewNewsPage> createState() => _ViewNewsPageState();
 }
 
-class _NewsViewPageState extends State<NewsViewPage> {
+class _ViewNewsPageState extends State<ViewNewsPage> {
 
   //inisialisasi webview
   late WebViewController controller;

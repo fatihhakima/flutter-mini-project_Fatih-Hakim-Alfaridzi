@@ -19,7 +19,7 @@ class ServiceNewsArticle {
       print('Response Data: ${response.data}');
 
       if (response.statusCode == 200) {
-        final List<dynamic> jsonResponse = response.data['articles'];
+        final List<dynamic> jsonResponse = response.data['articles']; // 'articles' merupakan key atau kata kunci dari responsenya
         final List<ModelNewsArticle> newsArticles = jsonResponse
             .map((articleJson) => ModelNewsArticle.fromJson(articleJson))
             .toList();

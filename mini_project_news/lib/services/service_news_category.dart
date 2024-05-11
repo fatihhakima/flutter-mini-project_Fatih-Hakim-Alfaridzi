@@ -1,17 +1,16 @@
 import 'package:dio/dio.dart';
 import 'package:mini_project_news/env/env.dart';
-import 'package:mini_project_news/model/model_news_slider.dart';
+import 'package:mini_project_news/model/model_news_category.dart';
 import 'package:mini_project_news/utils/base_url.dart';
 
-class ServiceNewsSlider {
+class ServiceNewsCategory {
   final Dio _dio = Dio();
 
-  Future<List<ModelNewsSlider>> fetchNewsSlider() async {
+  Future<List<ModelNewsCategory>> fetchNewsCategory(String category) async {
     try {
       const newsApiKey = Env.newsApiKey;
       final url =
-          '${BaseUrl.baseUrl}everything?q=mobile-developer&sortBy=relevance&apiKey=$newsApiKey';
-          // mobile developer = mobile-developer
+          '${BaseUrl.baseUrl}top-headlines?country=us&category=$category&apiKey=$newsApiKey';
 
       final response = await _dio.get(url);
 
@@ -20,13 +19,13 @@ class ServiceNewsSlider {
 
       if (response.statusCode == 200) {
         final List<dynamic> jsonResponse = response.data['articles']; // 'articles' merupakan key atau kata kunci dari responsenya
-        final List<ModelNewsSlider> newsSliders = jsonResponse
-            .map((sliderJson) => ModelNewsSlider.fromJson(sliderJson))
+        final List<ModelNewsCategory> newsCategories = jsonResponse
+            .map((categoryJson) => ModelNewsCategory.fromJson(categoryJson))
             .toList();
         
-        final List<ModelNewsSlider> filteredSliders = newsSliders.where((slider) => slider.urlToImage != null && slider.title != null).toList();
+        final List<ModelNewsCategory> filteredCategories = newsCategories.where((category) => category.urlToImage != null && category.description != null).toList();
 
-        return filteredSliders;
+        return filteredCategories;
       } else {
         throw Exception('Failed to Load News API');
       }

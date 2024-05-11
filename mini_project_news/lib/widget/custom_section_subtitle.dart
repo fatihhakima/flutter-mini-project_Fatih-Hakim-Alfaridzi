@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mini_project_news/constant/constant_text_style.dart';
+import 'package:mini_project_news/view/view_all_news_article_page.dart';
 
 class CustomSectionSubtitle extends StatelessWidget {
   final String title;
@@ -18,7 +19,9 @@ class CustomSectionSubtitle extends StatelessWidget {
             style: ConstantTextStyle.latoBold.copyWith(fontSize: 16),
           ),
           TextButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => ViewAllArticlesPage(),));
+            },
             child: Text(
               'View All',
               style: ConstantTextStyle.latoReg.copyWith(

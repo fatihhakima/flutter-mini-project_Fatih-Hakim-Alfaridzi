@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:mini_project_news/constant/constant_text_style.dart';
 import 'package:mini_project_news/model/model_news_slider.dart';
 import 'package:mini_project_news/services/service_news_slider.dart';
-import 'package:mini_project_news/view/news_view_page.dart';
+import 'package:mini_project_news/view/view_news_page.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class CustomCarouselSlider extends StatefulWidget {
@@ -37,17 +37,18 @@ class _CustomCarouselSliderState extends State<CustomCarouselSlider> {
             List<ModelNewsSlider> sliders = snapshot.data ?? [];
             return Column(children: [
               CarouselSlider.builder(
-                itemCount: sliders.length,
+                itemCount: 5, //sliders.length
                 itemBuilder: ((context, index, realIndex) {
                   String? resImg = sliders[index].urlToImage;
                   String? resName = sliders[index].title;
                   return buildSliderImage(resImg!, index, resName!, sliders);
                 }),
                 options: CarouselOptions(
-                  height: 250,
+                  height: 300,
                   autoPlay: true,
-                  enlargeCenterPage: true,
-                  enlargeStrategy: CenterPageEnlargeStrategy.height,
+                  enlargeCenterPage: false,
+                  viewportFraction: 1, // untuk mengubah jumlah gambar yang ditampilkan pada slider
+                  // enlargeStrategy: CenterPageEnlargeStrategy.height,
                   onPageChanged: (index, reason) {
                     setState(() {
                       activeIndexSlider = index;
@@ -69,33 +70,33 @@ class _CustomCarouselSliderState extends State<CustomCarouselSlider> {
               context,
               MaterialPageRoute(
                 builder: (context) =>
-                    NewsViewPage(newsUrl: sliders[index].url ?? ''),
+                    ViewNewsPage(newsUrl: sliders[index].url ?? ''),
               ));
         },
         child: Container(
-          margin: EdgeInsets.symmetric(horizontal: 4),
+          // margin: EdgeInsets.symmetric(horizontal: 4),
           child: Stack(
             children: [
               ClipRRect(
-                borderRadius: BorderRadius.circular(6),
+                borderRadius: BorderRadius.circular(0),
                 child: Container(
                   child: Image.network(
                     sliderImage,
-                    height: 250,
+                    height: 300, //300
                     fit: BoxFit.cover,
                     width: MediaQuery.of(context).size.width,
                   ),
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(top: 190),
+                margin: EdgeInsets.only(top: 220),
                 padding: EdgeInsets.symmetric(horizontal: 10),
-                height: 250,
+                height: 300, //300
                 width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
                   color: Colors.black38,
                   borderRadius:
-                      BorderRadius.only(bottomLeft: Radius.circular(6)),
+                      BorderRadius.only(bottomLeft: Radius.circular(0)),
                 ),
                 child: Text(
                   sliderName,
@@ -111,10 +112,10 @@ class _CustomCarouselSliderState extends State<CustomCarouselSlider> {
 
   Widget buildSliderIndicator(int itemCount) => AnimatedSmoothIndicator(
         activeIndex: activeIndexSlider,
-        count: itemCount,
+        count: 5, //itemCount
         effect: WormEffect(
-          dotWidth: 14,
-          dotHeight: 14,
+          dotWidth: 10,
+          dotHeight: 10,
           activeDotColor: Colors.blue,
         ),
       );
