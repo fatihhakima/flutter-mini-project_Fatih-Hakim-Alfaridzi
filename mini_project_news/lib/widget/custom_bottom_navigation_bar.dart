@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mini_project_news/view/chat_ai_page.dart';
 import 'package:mini_project_news/view/home_page.dart';
 import 'package:mini_project_news/view/search_page.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
@@ -24,7 +25,7 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const SearchPage(),));
       break;
        case 2:
-       // Navigator.of(context).push(MaterialPageRoute(builder: (context) => HomePage(),));
+       Navigator.push(context, MaterialPageRoute(builder: (context) => ChatAIPage(),));
       break;
       }
   }
