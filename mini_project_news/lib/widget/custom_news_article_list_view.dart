@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:mini_project_news/constant/constant_text_style.dart';
 import 'package:mini_project_news/model/model_news_article.dart';
@@ -69,18 +68,37 @@ class _CustomNewsArticleListViewState extends State<CustomNewsArticleListView> {
                 Container(
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(8),
-                    child: newsArticle.urlToImage!.isNotEmpty
-                        ? CachedNetworkImage(
-                            imageUrl: newsArticle.urlToImage ?? '',
-                            placeholder: (context, url) =>
-                                const CircularProgressIndicator(),
-                            errorWidget: (context, url, error) =>
-                                const Icon(Icons.error),
+                    child: Image.network(
+                      newsArticle.urlToImage ?? '',
+                      loadingBuilder: (context, child, loadingProgress) {
+                        if (loadingProgress == null) {
+                          return child;
+                        }
+                        return Center(
+                          child: SizedBox(
                             height: 120,
                             width: 120,
-                            fit: BoxFit.cover,
-                          )
-                        : Image.asset('assets/image_error_placeholder.png'),
+                            child: CircularProgressIndicator(
+                              value: loadingProgress.expectedTotalBytes != null
+                                  ? loadingProgress.cumulativeBytesLoaded /
+                                      loadingProgress.expectedTotalBytes!
+                                  : null,
+                            ),
+                          ),
+                        );
+                      },
+                      errorBuilder: (context, error, stackTrace) {
+                        return Image.asset(
+                          'assets/image_error_placeholder.png',
+                          height: 120,
+                          width: 120,
+                          fit: BoxFit.cover,
+                        );
+                      },
+                      height: 120,
+                      width: 120,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
                 const SizedBox(width: 8),

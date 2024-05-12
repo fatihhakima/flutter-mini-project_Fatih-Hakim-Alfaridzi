@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:mini_project_news/constant/constant_text_style.dart';
@@ -83,18 +82,37 @@ class _CustomCarouselSliderState extends State<CustomCarouselSlider> {
               ClipRRect(
                 borderRadius: BorderRadius.circular(0),
                 child: Container(
-                  child: sliderImage.isNotEmpty
-                      ? CachedNetworkImage(
-                          imageUrl: sliderImage,
-                          placeholder: (context, url) =>
-                              const CircularProgressIndicator(),
-                          errorWidget: (context, url, error) =>
-                              const Icon(Icons.error),
-                          height: 300, //300
-                          fit: BoxFit.cover,
-                          width: MediaQuery.of(context).size.width,
-                        )
-                      : Image.asset('assets/image_error_placeholder.png'),
+                  child: Image.network(
+                    sliderImage,
+                    loadingBuilder: (context, child, loadingProgress) {
+                      if (loadingProgress == null) {
+                        return child;
+                      }
+                      return Center(
+                        child: SizedBox(
+                          height: 120,
+                          width: 120,
+                          child: CircularProgressIndicator(
+                            value: loadingProgress.expectedTotalBytes != null
+                                ? loadingProgress.cumulativeBytesLoaded /
+                                    loadingProgress.expectedTotalBytes!
+                                : null,
+                          ),
+                        ),
+                      );
+                    },
+                    errorBuilder: (context, error, stackTrace) {
+                      return Image.asset(
+                        'assets/image_error_placeholder.png',
+                        height: 300,
+                        width: MediaQuery.of(context).size.width,
+                        fit: BoxFit.cover,
+                      );
+                    },
+                    height: 300,
+                    width: MediaQuery.of(context).size.width,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
               Container(
