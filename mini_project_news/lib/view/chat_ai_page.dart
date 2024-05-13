@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:dash_chat_2/dash_chat_2.dart';
-// import 'package:flutter_gemini/flutter_gemini.dart';
 import 'package:mini_project_news/provider/provider_chat_ai_page.dart';
 import 'package:mini_project_news/widget/custom_title_text.dart';
 import 'package:provider/provider.dart';

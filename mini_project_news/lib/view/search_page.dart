@@ -3,7 +3,6 @@ import 'package:mini_project_news/constant/constant_text_style.dart';
 import 'package:mini_project_news/model/model_search_news.dart';
 import 'package:mini_project_news/provider/provider_custom_bottom_navbar.dart';
 import 'package:mini_project_news/provider/provider_search_page.dart';
-// import 'package:mini_project_news/services/service_search_news.dart';
 import 'package:mini_project_news/view/view_news_page.dart';
 import 'package:mini_project_news/widget/custom_bottom_navigation_bar.dart';
 import 'package:mini_project_news/widget/custom_title_text.dart';

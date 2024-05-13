@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:mini_project_news/constant/constant_text_style.dart';
 import 'package:mini_project_news/model/model_news_slider.dart';
 import 'package:mini_project_news/provider/provider_home_page.dart';
-// import 'package:mini_project_news/services/service_news_slider.dart';
 import 'package:mini_project_news/view/view_news_page.dart';
 import 'package:provider/provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mini_project_news/provider/provider_custom_bottom_navbar.dart';
-// import 'package:mini_project_news/widget/custom_bottom_navbar.dart';
 import 'package:mini_project_news/widget/custom_bottom_navigation_bar.dart';
-// import 'package:mini_project_news/widget/custom_bottom_navigation_bar.dart';
 import 'package:mini_project_news/widget/custom_news_carousel_slider.dart';
 import 'package:mini_project_news/widget/custom_category_list_view.dart';
 import 'package:mini_project_news/widget/custom_news_article_list_view.dart';

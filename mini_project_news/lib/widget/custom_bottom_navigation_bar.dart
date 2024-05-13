@@ -1,19 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:mini_project_news/provider/provider_custom_bottom_navbar.dart';
-// import 'package:mini_project_news/view/chat_ai_page.dart';
-// import 'package:mini_project_news/view/home_page.dart';
-// import 'package:mini_project_news/view/search_page.dart';
 import 'package:provider/provider.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
 class CustomBottomNavBar extends StatefulWidget {
-  // final int currentIndexNavigation;
-  // final Function(int) onTap;
-
   const CustomBottomNavBar({
     super.key,
-    // required this.currentIndexNavigation,
-    // required this.onTap,
   });
 
   @override
@@ -21,7 +13,6 @@ class CustomBottomNavBar extends StatefulWidget {
 }
 
 class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
-
   @override
   Widget build(BuildContext context) {
     final providerBottomNavBar = Provider.of<ProviderBottomNavBar>(context);

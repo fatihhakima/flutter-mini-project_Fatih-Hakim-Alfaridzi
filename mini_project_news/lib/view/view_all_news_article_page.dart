@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:mini_project_news/constant/constant_text_style.dart';
 import 'package:mini_project_news/model/model_news_article.dart';
 import 'package:mini_project_news/provider/provider_view_all_news_page.dart';
-// import 'package:mini_project_news/services/service_news_article.dart';
 import 'package:mini_project_news/view/view_news_page.dart';
 import 'package:provider/provider.dart';
 
