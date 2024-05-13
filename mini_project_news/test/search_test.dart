@@ -13,7 +13,7 @@ void main() {
       await tester.pumpWidget(MaterialApp(
         home: ChangeNotifierProvider(
           create: (context) => ProviderSearchPage(),
-          child: SearchPage(),
+          child: const SearchPage(),
         ),
       ));
 
@@ -37,7 +37,7 @@ void main() {
       await tester.pumpWidget(MaterialApp(
         home: ChangeNotifierProvider(
           create: (context) => ProviderSearchPage(),
-          child: SearchPage(),
+          child: const SearchPage(),
         ),
       ));
       

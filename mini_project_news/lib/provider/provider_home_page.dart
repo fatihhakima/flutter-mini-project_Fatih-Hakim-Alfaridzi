@@ -7,7 +7,7 @@ import 'package:mini_project_news/services/service_news_article.dart';
 import 'package:mini_project_news/services/service_news_slider.dart';
 
 class ProviderHomePage extends ChangeNotifier {
-  int _currentIndex = 0;
+  final int _currentIndex = 0;
   int get currentIndex => _currentIndex;
 
   // Custom Slider

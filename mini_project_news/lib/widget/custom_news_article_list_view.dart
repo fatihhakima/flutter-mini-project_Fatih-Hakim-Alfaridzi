@@ -56,6 +56,7 @@ class _CustomNewsArticleListViewState extends State<CustomNewsArticleListView> {
     );
   }
 
+  // ignore: non_constant_identifier_names
   Widget CardNewsArticle(ModelNewsArticle newsArticle) {
     return GestureDetector(
       onTap: () {
@@ -72,6 +73,7 @@ class _CustomNewsArticleListViewState extends State<CustomNewsArticleListView> {
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 6),
             child: Row(
               children: [
+                // ignore: avoid_unnecessary_containers
                 Container(
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(8),
@@ -111,7 +113,7 @@ class _CustomNewsArticleListViewState extends State<CustomNewsArticleListView> {
                 const SizedBox(width: 8),
                 Column(
                   children: [
-                    Container(
+                    SizedBox(
                       width: MediaQuery.of(context).size.width / 1.8,
                       child: Text(
                         newsArticle.title ?? '',
@@ -122,7 +124,7 @@ class _CustomNewsArticleListViewState extends State<CustomNewsArticleListView> {
                       ),
                     ),
                     const SizedBox(height: 10),
-                    Container(
+                    SizedBox(
                       width: MediaQuery.of(context).size.width / 1.8,
                       child: Text(
                         newsArticle.description ?? 'Description Not Available',

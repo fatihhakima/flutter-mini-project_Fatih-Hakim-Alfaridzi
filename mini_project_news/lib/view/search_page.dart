@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mini_project_news/constant/constant_text_style.dart';
 import 'package:mini_project_news/model/model_search_news.dart';
+import 'package:mini_project_news/provider/provider_custom_bottom_navbar.dart';
 import 'package:mini_project_news/provider/provider_search_page.dart';
 // import 'package:mini_project_news/services/service_search_news.dart';
 import 'package:mini_project_news/view/view_news_page.dart';
@@ -16,7 +17,7 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
-  int _currentIndex = 1;
+  // int _currentIndex = 1;
   // final _searchNewsController = TextEditingController();
   // final ServiceSearchNews _searchNewsService = ServiceSearchNews();
   // late Future<List<ModelSearchNews>> _searchNewsFuture = Future.value([]);
@@ -37,6 +38,10 @@ class _SearchPageState extends State<SearchPage> {
 
   @override
   Widget build(BuildContext context) {
+    final currentIndexProvider = Provider.of<ProviderBottomNavBar>(context);
+    // ignore: unused_local_variable
+    int currentIndex = currentIndexProvider.currentIndex;
+
     final provider = Provider.of<ProviderSearchPage>(context);
 
     return Scaffold(
@@ -96,27 +101,9 @@ class _SearchPageState extends State<SearchPage> {
             ],
           ),
         ),
-        // Align(
-        //   alignment: Alignment.bottomCenter,
-        //   child: CustomBottomNavBar(
-        //     currentIndexNavigation: _currentIndex,
-        //     onTap: (index) => setState(() {
-        //       _currentIndex = index;
-        //     }),
-        //   ),
-        // )
-        // Positioned(
-        //   left: 0,
-        //   right: 0,
-        //   bottom: 0,
-        //   child: CustomBottomNavBar()),
       ),
-      bottomNavigationBar: CustomBottomNavBar(
-        currentIndexNavigation: _currentIndex,
-        onTap: (index) => setState(() {
-          _currentIndex = index;
-        }),
-      ),
+      // ignore: prefer_const_constructors
+      bottomNavigationBar: CustomBottomNavBar(),
     );
   }
 
@@ -153,6 +140,7 @@ class _SearchPageState extends State<SearchPage> {
     );
   }
 
+  // ignore: non_constant_identifier_names
   Widget CardSearchNews(ModelSearchNews searchNewsArticle) {
     return GestureDetector(
       onTap: () {
@@ -170,6 +158,7 @@ class _SearchPageState extends State<SearchPage> {
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 6),
             child: Row(
               children: [
+                // ignore: avoid_unnecessary_containers
                 Container(
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(8),
@@ -209,6 +198,7 @@ class _SearchPageState extends State<SearchPage> {
                 const SizedBox(width: 8),
                 Column(
                   children: [
+                    // ignore: sized_box_for_whitespace
                     Container(
                       width: MediaQuery.of(context).size.width / 1.8,
                       child: Text(
@@ -220,6 +210,7 @@ class _SearchPageState extends State<SearchPage> {
                       ),
                     ),
                     const SizedBox(height: 10),
+                    // ignore: sized_box_for_whitespace
                     Container(
                       width: MediaQuery.of(context).size.width / 1.8,
                       child: Text(

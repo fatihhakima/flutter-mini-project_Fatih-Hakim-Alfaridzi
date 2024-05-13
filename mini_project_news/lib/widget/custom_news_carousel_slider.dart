@@ -88,12 +88,14 @@ class _CustomCarouselSliderState extends State<CustomCarouselSlider> {
                     ViewNewsPage(newsUrl: sliders[index].url ?? ''),
               ));
         },
+        // ignore: avoid_unnecessary_containers
         child: Container(
           // margin: EdgeInsets.symmetric(horizontal: 4),
           child: Stack(
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(0),
+                // ignore: avoid_unnecessary_containers
                 child: Container(
                   child: Image.network(
                     sliderImage,

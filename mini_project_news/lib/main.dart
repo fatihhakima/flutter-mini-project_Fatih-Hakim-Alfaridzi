@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gemini/flutter_gemini.dart';
 import 'package:mini_project_news/provider/provider_chat_ai_page.dart';
+import 'package:mini_project_news/provider/provider_custom_bottom_navbar.dart';
 // import 'package:mini_project_news/provider/provider_custom_bottom_navbar.dart';
 import 'package:mini_project_news/provider/provider_home_page.dart';
 import 'package:mini_project_news/provider/provider_search_page.dart';
@@ -13,16 +14,15 @@ import 'package:provider/provider.dart';
 void main() {
   // HttpOverrides.global = new MyHttpOverrides();
   Gemini.init(apiKey: Env.geminiApiKey);
-    runApp(
+  runApp(
     MultiProvider(
       providers: [
+        ChangeNotifierProvider(create: (context) => ProviderBottomNavBar()),
         ChangeNotifierProvider(create: (context) => ProviderHomePage()),
         ChangeNotifierProvider(create: (context) => ProviderViewCategory()),
         ChangeNotifierProvider(create: (context) => ProviderViewAllNews()),
         ChangeNotifierProvider(create: (context) => ProviderSearchPage()),
         ChangeNotifierProvider(create: (context) => ProviderChatAI()),
-        
-        // Add other providers here if you have more
       ],
       child: const MyApp(),
     ),

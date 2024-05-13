@@ -14,6 +14,7 @@ Future<List<ModelNewsCategory>> _fetchNewsCategory(String category) async {
   try {
     return await ServiceNewsCategory().fetchNewsCategory(category);
   } catch (e) {
+    // ignore: avoid_print
     print('Error fetching category: $e');
     throw Exception('Failed to fetch news category');
   }

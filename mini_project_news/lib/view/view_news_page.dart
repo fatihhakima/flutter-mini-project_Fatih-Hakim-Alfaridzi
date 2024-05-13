@@ -12,7 +12,6 @@ class ViewNewsPage extends StatefulWidget {
 }
 
 class _ViewNewsPageState extends State<ViewNewsPage> {
-
   //inisialisasi webview
   late WebViewController controller;
 
@@ -20,8 +19,8 @@ class _ViewNewsPageState extends State<ViewNewsPage> {
   void initState() {
     super.initState();
     controller = WebViewController()
-    ..setJavaScriptMode(JavaScriptMode.disabled)
-    ..loadRequest(Uri.parse(widget.newsUrl));
+      ..setJavaScriptMode(JavaScriptMode.unrestricted)
+      ..loadRequest(Uri.parse(widget.newsUrl));
   }
 
   // final controller = WebViewController()
@@ -35,8 +34,8 @@ class _ViewNewsPageState extends State<ViewNewsPage> {
         title: const CustomTextTitle(),
         centerTitle: true,
         elevation: 0,
-        ),
-        body: WebViewWidget(controller: controller),
+      ),
+      body: WebViewWidget(controller: controller),
     );
   }
 }

@@ -3,7 +3,7 @@ import 'package:mini_project_news/model/model_search_news.dart';
 import 'package:mini_project_news/services/service_search_news.dart';
 
 class ProviderSearchPage extends ChangeNotifier {
-  int _currentIndex = 1;
+  final int _currentIndex = 1;
   int get currentIndex => _currentIndex;
 
   final ServiceSearchNews _searchNewsService = ServiceSearchNews();
@@ -24,6 +24,7 @@ class ProviderSearchPage extends ChangeNotifier {
         searchNewsResult = _searchNewsService.fetchSearchNews(searchText);
         notifyListeners();
       } catch (e) {
+        // ignore: avoid_print
         print('Error Searching News: $e');
       }
     }

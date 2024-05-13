@@ -46,7 +46,9 @@ class _CustomCategoryState extends State<CustomCategory> {
 }
 
 class CustomCategoryTile extends StatelessWidget {
+  // ignore: prefer_typing_uninitialized_variables
   final categoryTileName;
+  // ignore: prefer_typing_uninitialized_variables
   final categoryTileImage;
 
   const CustomCategoryTile(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mini_project_news/provider/provider_custom_bottom_navbar.dart';
 // import 'package:mini_project_news/widget/custom_bottom_navbar.dart';
 import 'package:mini_project_news/widget/custom_bottom_navigation_bar.dart';
 // import 'package:mini_project_news/widget/custom_bottom_navigation_bar.dart';
@@ -7,6 +8,7 @@ import 'package:mini_project_news/widget/custom_category_list_view.dart';
 import 'package:mini_project_news/widget/custom_news_article_list_view.dart';
 import 'package:mini_project_news/widget/custom_section_subtitle.dart';
 import 'package:mini_project_news/widget/custom_title_text.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -16,10 +18,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _currentIndex = 0;
-
   @override
   Widget build(BuildContext context) {
+    final currentIndexProvider = Provider.of<ProviderBottomNavBar>(context);
+    // ignore: unused_local_variable
+    int currentIndex = currentIndexProvider.currentIndex;
+
     return Scaffold(
       appBar: AppBar(
         title: const CustomTextTitle(),
@@ -37,23 +41,7 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
-      bottomNavigationBar: CustomBottomNavBar(
-        currentIndexNavigation: _currentIndex,
-        onTap: (index) => setState(
-          () {
-            _currentIndex = index;
-          },
-        ),
-      ),
-      // Align(
-      //   alignment: Alignment.bottomCenter,
-      //   child: CustomNavigationBar(),
-      // )
-      // Positioned(
-      //   left: 0,
-      //   right: 0,
-      //   bottom: 0,
-      //   child: CustomBottomNavBar()),
+      bottomNavigationBar: const CustomBottomNavBar(),
     );
   }
 }

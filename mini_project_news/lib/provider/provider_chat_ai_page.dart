@@ -39,7 +39,9 @@ class ProviderChatAI extends ChangeNotifier {
             messages.insert(0, lastMessage);
           } else {
             String response = event.content?.parts?.fold(
-                    '', (previousValue, element) => '$previousValue${element.text}') ??
+                    '',
+                    (previousValue, element) =>
+                        '$previousValue${element.text}') ??
                 '';
             ChatMessage message = ChatMessage(
               user: geminiUser,
@@ -48,10 +50,23 @@ class ProviderChatAI extends ChangeNotifier {
             );
             messages.insert(0, message);
           }
-          notifyListeners(); // Notify listeners after updating messages
+          notifyListeners();
+          // ignore: avoid_print
+          print('Response from Gemini API: ${event.content?.parts}');
+        },
+        onError: (error) {
+          // Handle errors
+          // ignore: avoid_print
+          print('Error processing message: $error');
+        },
+        onDone: () {
+          // Handle stream completion if necessary
+          // ignore: avoid_print
+          print('Message processing completed');
         },
       );
     } catch (e) {
+      // ignore: avoid_print
       print(e);
     }
   }
