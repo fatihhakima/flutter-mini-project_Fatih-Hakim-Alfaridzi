@@ -1,44 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:mini_project_news/constant/constant_text_style.dart';
-import 'package:mini_project_news/model/model_custom_category.dart';
+// import 'package:mini_project_news/model/model_custom_category.dart';
+import 'package:mini_project_news/provider/provider_home_page.dart';
+// import 'package:mini_project_news/services/category_data.dart';
 import 'package:mini_project_news/view/view_category_page.dart';
-
-List<CustomCategoryModel> getCategories() {
-  List<CustomCategoryModel> category = [];
-  CustomCategoryModel customCategoryModel = new CustomCategoryModel();
-
-  customCategoryModel.categoryName = 'Business';
-  customCategoryModel.categoryImage = 'assets/business.png';
-  category.add(customCategoryModel);
-  customCategoryModel = new CustomCategoryModel();
-
-  customCategoryModel.categoryName = 'Entertainment';
-  customCategoryModel.categoryImage = 'assets/entertainment.png';
-  category.add(customCategoryModel);
-  customCategoryModel = new CustomCategoryModel();
-
-  customCategoryModel.categoryName = 'Health';
-  customCategoryModel.categoryImage = 'assets/health.png';
-  category.add(customCategoryModel);
-  customCategoryModel = new CustomCategoryModel();
-
-  customCategoryModel.categoryName = 'Science';
-  customCategoryModel.categoryImage = 'assets/science.png';
-  category.add(customCategoryModel);
-  customCategoryModel = new CustomCategoryModel();
-
-  customCategoryModel.categoryName = 'Sport';
-  customCategoryModel.categoryImage = 'assets/sport.png';
-  category.add(customCategoryModel);
-  customCategoryModel = new CustomCategoryModel();
-
-  customCategoryModel.categoryName = 'Technology';
-  customCategoryModel.categoryImage = 'assets/technology.png';
-  category.add(customCategoryModel);
-  customCategoryModel = new CustomCategoryModel();
-
-  return category;
-}
+import 'package:provider/provider.dart';
 
 class CustomCategory extends StatefulWidget {
   const CustomCategory({super.key});
@@ -48,27 +14,30 @@ class CustomCategory extends StatefulWidget {
 }
 
 class _CustomCategoryState extends State<CustomCategory> {
-  List<CustomCategoryModel> categories = [];
+  // List<CustomCategoryModel> categories = [];
 
-  @override
-  void initState() {
-    categories = getCategories();
-    super.initState();
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   categories = getCategories();
+  // }
 
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<ProviderHomePage>(context);
+
     return Container(
       margin: const EdgeInsets.only(left: 8),
       height: 80,
       child: ListView.builder(
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,
-        itemCount: categories.length,
+        itemCount: provider.categories.length,
         itemBuilder: (context, index) {
+          final category = provider.categories[index];
           return CustomCategoryTile(
-            categoryTileName: categories[index].categoryName,
-            categoryTileImage: categories[index].categoryImage,
+            categoryTileName: category.categoryName,
+            categoryTileImage: category.categoryImage,
           );
         },
       ),

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:mini_project_news/constant/constant_text_style.dart';
 import 'package:mini_project_news/model/model_news_article.dart';
-import 'package:mini_project_news/services/service_news_article.dart';
+import 'package:mini_project_news/provider/provider_view_all_news_page.dart';
+// import 'package:mini_project_news/services/service_news_article.dart';
 import 'package:mini_project_news/view/view_news_page.dart';
+import 'package:provider/provider.dart';
 
 class ViewAllArticlesPage extends StatefulWidget {
   const ViewAllArticlesPage({super.key});
@@ -12,17 +14,19 @@ class ViewAllArticlesPage extends StatefulWidget {
 }
 
 class _ViewAllArticlesPageState extends State<ViewAllArticlesPage> {
-  final ServiceNewsArticle _newsArticleService = ServiceNewsArticle();
-  late Future<List<ModelNewsArticle>> _newsArticleFuture;
+  // final ServiceNewsArticle _newsArticleService = ServiceNewsArticle();
+  // late Future<List<ModelNewsArticle>> _newsArticleFuture;
 
-  @override
-  void initState() {
-    super.initState();
-    _newsArticleFuture = _newsArticleService.fetchNewsArticle();
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   _newsArticleFuture = _newsArticleService.fetchNewsArticle();
+  // }
 
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<ProviderViewAllNews>(context);
+
     return Scaffold(
       appBar: AppBar(
         title: Row(
@@ -42,7 +46,7 @@ class _ViewAllArticlesPageState extends State<ViewAllArticlesPage> {
         ),
       ),
       body: FutureBuilder(
-        future: _newsArticleFuture,
+        future: provider.getAllNewsFuture(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(

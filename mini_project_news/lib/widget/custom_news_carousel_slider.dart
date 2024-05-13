@@ -2,8 +2,10 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:mini_project_news/constant/constant_text_style.dart';
 import 'package:mini_project_news/model/model_news_slider.dart';
-import 'package:mini_project_news/services/service_news_slider.dart';
+import 'package:mini_project_news/provider/provider_home_page.dart';
+// import 'package:mini_project_news/services/service_news_slider.dart';
 import 'package:mini_project_news/view/view_news_page.dart';
+import 'package:provider/provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class CustomCarouselSlider extends StatefulWidget {
@@ -14,54 +16,65 @@ class CustomCarouselSlider extends StatefulWidget {
 }
 
 class _CustomCarouselSliderState extends State<CustomCarouselSlider> {
-  final ServiceNewsSlider _newsSliderService = ServiceNewsSlider();
-  late Future<List<ModelNewsSlider>> _newsSliderFuture;
-  int activeIndexSlider = 0;
+  // final ServiceNewsSlider _newsSliderService = ServiceNewsSlider();
+  // late Future<List<ModelNewsSlider>> _newsSliderFuture;
+  // int activeIndexSlider = 0;
 
-  @override
-  void initState() {
-    super.initState();
-    _newsSliderFuture = _newsSliderService.fetchNewsSlider();
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   _newsSliderFuture = _newsSliderService.fetchNewsSlider();
+  // }
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<List<ModelNewsSlider>>(
-        future: _newsSliderFuture,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const CircularProgressIndicator();
-          } else if (snapshot.hasError) {
-            return Text('Error: ${snapshot.error}');
-          } else {
-            List<ModelNewsSlider> sliders = snapshot.data ?? [];
-            return Column(children: [
-              CarouselSlider.builder(
-                itemCount: 5, //sliders.length
-                itemBuilder: ((context, index, realIndex) {
-                  String? resImg = sliders[index].urlToImage;
-                  String? resName = sliders[index].title;
-                  return buildSliderImage(resImg!, index, resName!, sliders);
-                }),
-                options: CarouselOptions(
-                  height: 300,
-                  autoPlay: true,
-                  enlargeCenterPage: false,
-                  viewportFraction:
-                      1, // untuk mengubah jumlah gambar yang ditampilkan pada slider
-                  // enlargeStrategy: CenterPageEnlargeStrategy.height,
-                  onPageChanged: (index, reason) {
-                    setState(() {
-                      activeIndexSlider = index;
-                    });
-                  },
-                ),
-              ),
-              const SizedBox(height: 14),
-              buildSliderIndicator(sliders.length),
-            ]);
-          }
-        });
+    return Consumer<ProviderHomePage>(
+      builder: (context, provider, child) {
+        final slidersFuture = provider.getNewsSliderFuture();
+        final activeIndexSlider = provider.activeIndexSlider;
+        return FutureBuilder<List<ModelNewsSlider>>(
+            future: slidersFuture,
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const CircularProgressIndicator();
+              } else if (snapshot.hasError) {
+                return Text('Error: ${snapshot.error}');
+              } else {
+                List<ModelNewsSlider> sliders = snapshot.data ?? [];
+                return Column(children: [
+                  CarouselSlider.builder(
+                    itemCount: 5, //sliders.length
+                    itemBuilder: ((context, index, realIndex) {
+                      String? resImg = sliders[index].urlToImage;
+                      String? resName = sliders[index].title;
+                      return buildSliderImage(
+                        resImg!,
+                        index,
+                        resName!,
+                        sliders,
+                      );
+                    }),
+                    options: CarouselOptions(
+                      height: 300,
+                      autoPlay: true,
+                      enlargeCenterPage: false,
+                      viewportFraction:
+                          1, // untuk mengubah jumlah gambar yang ditampilkan pada slider
+                      // enlargeStrategy: CenterPageEnlargeStrategy.height,
+                      onPageChanged: (index, reason) {
+                        setState(() {
+                          provider.setActiveIndexSlider(index);
+                        });
+                      },
+                    ),
+                  ),
+                  const SizedBox(height: 14),
+                  buildSliderIndicator(sliders.length, activeIndexSlider),
+                ]);
+              }
+            });
+      },
+    );
   }
 
   Widget buildSliderImage(String sliderImage, int index, String sliderName,
@@ -137,7 +150,7 @@ class _CustomCarouselSliderState extends State<CustomCarouselSlider> {
         ),
       );
 
-  Widget buildSliderIndicator(int itemCount) => AnimatedSmoothIndicator(
+  Widget buildSliderIndicator(int itemCount, int activeIndexSlider) => AnimatedSmoothIndicator(
         activeIndex: activeIndexSlider,
         count: 5, //itemCount
         effect: const WormEffect(

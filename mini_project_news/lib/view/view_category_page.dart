@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:mini_project_news/constant/constant_text_style.dart';
-import 'package:mini_project_news/model/model_news_category.dart';
-import 'package:mini_project_news/services/service_news_category.dart';
+// import 'package:mini_project_news/model/model_news_category.dart';
+import 'package:mini_project_news/provider/provider_view_category_page.dart';
+// import 'package:mini_project_news/services/service_news_category.dart';
 import 'package:mini_project_news/view/view_news_page.dart';
+import 'package:provider/provider.dart';
 
 class ViewCategoryPage extends StatefulWidget {
   final String? category;
@@ -14,26 +16,31 @@ class ViewCategoryPage extends StatefulWidget {
 }
 
 class _ViewCategoryPageState extends State<ViewCategoryPage> {
-  late Future<List<ModelNewsCategory>> _newsCategoryFuture;
+  // late Future<List<ModelNewsCategory>> _newsCategoryFuture;
 
-  @override
-  void initState() {
-    super.initState();
-    _newsCategoryFuture =
-        _fetchNewsCategory(widget.category ?? ''.toLowerCase());
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   _newsCategoryFuture =
+  //       _fetchNewsCategory(widget.category ?? ''.toLowerCase());
+  // }
 
-  Future<List<ModelNewsCategory>> _fetchNewsCategory(String category) async {
-    try {
-      return await ServiceNewsCategory().fetchNewsCategory(category);
-    } catch (e) {
-      print('Error fetching news: $e');
-      throw Exception('Failed to fetch news');
-    }
-  }
+  // Future<List<ModelNewsCategory>> _fetchNewsCategory(String category) async {
+  //   try {
+  //     return await ServiceNewsCategory().fetchNewsCategory(category);
+  //   } catch (e) {
+  //     print('Error fetching news: $e');
+  //     throw Exception('Failed to fetch news');
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<ProviderViewCategory>(context);
+    final String category = widget.category ?? '';
+
+    provider.fetchNewsCategory(category);
+
     return Scaffold(
         appBar: AppBar(
           title: Text(
@@ -46,7 +53,7 @@ class _ViewCategoryPageState extends State<ViewCategoryPage> {
           centerTitle: true,
         ),
         body: FutureBuilder(
-          future: _newsCategoryFuture,
+          future: provider.newsCategoryFuture,
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:mini_project_news/constant/constant_text_style.dart';
 import 'package:mini_project_news/model/model_search_news.dart';
-import 'package:mini_project_news/services/service_search_news.dart';
+import 'package:mini_project_news/provider/provider_search_page.dart';
+// import 'package:mini_project_news/services/service_search_news.dart';
 import 'package:mini_project_news/view/view_news_page.dart';
 import 'package:mini_project_news/widget/custom_bottom_navigation_bar.dart';
 import 'package:mini_project_news/widget/custom_title_text.dart';
+import 'package:provider/provider.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
@@ -15,26 +17,28 @@ class SearchPage extends StatefulWidget {
 
 class _SearchPageState extends State<SearchPage> {
   int _currentIndex = 1;
-  final _searchNewsController = TextEditingController();
-  final ServiceSearchNews _searchNewsService = ServiceSearchNews();
-  late Future<List<ModelSearchNews>> _searchNewsFuture = Future.value([]);
+  // final _searchNewsController = TextEditingController();
+  // final ServiceSearchNews _searchNewsService = ServiceSearchNews();
+  // late Future<List<ModelSearchNews>> _searchNewsFuture = Future.value([]);
 
-  void _searchNews() async {
-    String searchText = _searchNewsController.text.trim().toLowerCase();
-    searchText = searchText.replaceAll(' ', '-');
+  // void _searchNews() async {
+  //   String searchText = _searchNewsController.text.trim().toLowerCase();
+  //   searchText = searchText.replaceAll(' ', '-');
 
-    if (searchText.isNotEmpty) {
-      try {
-        _searchNewsFuture = _searchNewsService.fetchSearchNews(searchText);
-        setState(() {});
-      } catch (e) {
-        print('Error Searching News: $e');
-      }
-    }
-  }
+  //   if (searchText.isNotEmpty) {
+  //     try {
+  //       _searchNewsFuture = _searchNewsService.fetchSearchNews(searchText);
+  //       setState(() {});
+  //     } catch (e) {
+  //       print('Error Searching News: $e');
+  //     }
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<ProviderSearchPage>(context);
+
     return Scaffold(
       appBar: AppBar(
         title: const CustomTextTitle(),
@@ -43,101 +47,109 @@ class _SearchPageState extends State<SearchPage> {
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10),
-        child: Stack(
-          children: [
-            SingleChildScrollView(
-              child: Column(
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Row(
                 children: [
-                  Row(
-                    children: [
-                      Expanded(
-                        child: TextFormField(
-                          controller: _searchNewsController,
-                          decoration: InputDecoration(
-                            prefixIcon: const Icon(Icons.search),
-                            contentPadding: const EdgeInsets.symmetric(
-                                horizontal: 16, vertical: 4),
-                            hintText: 'Search Spesific News',
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(30),
-                              borderSide: const BorderSide(
-                                color: Colors.grey,
-                                width: 1,
-                              ),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(30),
-                              borderSide: const BorderSide(
-                                color: Colors.grey,
-                                width: 1,
-                              ),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(30),
-                              borderSide: const BorderSide(
-                                color: Colors.grey,
-                                width: 1,
-                              ),
-                            ),
+                  Expanded(
+                    child: TextFormField(
+                      controller: provider.searchController,
+                      decoration: InputDecoration(
+                        prefixIcon: const Icon(Icons.search),
+                        contentPadding: const EdgeInsets.symmetric(
+                            horizontal: 16, vertical: 4),
+                        hintText: 'Search Spesific News',
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30),
+                          borderSide: const BorderSide(
+                            color: Colors.grey,
+                            width: 1,
+                          ),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30),
+                          borderSide: const BorderSide(
+                            color: Colors.grey,
+                            width: 1,
+                          ),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30),
+                          borderSide: const BorderSide(
+                            color: Colors.grey,
+                            width: 1,
                           ),
                         ),
                       ),
-                      IconButton(
-                          onPressed: () {
-                            _searchNews();
-                          },
-                          icon: const Icon(Icons.manage_search_sharp))
-                    ],
+                    ),
                   ),
-                  FutureBuilder<List<ModelSearchNews>>(
-                    future: _searchNewsFuture,
-                    builder: (context, snapshot) {
-                      if (snapshot.connectionState == ConnectionState.waiting) {
-                        return const Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      } else if (snapshot.hasError) {
-                        return Center(
-                          child: Text('Error : ${snapshot.error}'),
-                        );
-                      } else if (snapshot.hasData) {
-                        List<ModelSearchNews> searchNewsArticle =
-                            snapshot.data!;
-                        return ListView.builder(
-                          shrinkWrap: true,
-                          physics: const ClampingScrollPhysics(),
-                          itemCount: searchNewsArticle.length,
-                          itemBuilder: (context, index) {
-                            return CardSearchNews(searchNewsArticle[index]);
-                          },
-                        );
-                      } else {
-                        return const Center(
-                          child: Text('No Data Available'),
-                        );
-                      }
+                  IconButton(
+                    onPressed: () {
+                      provider.searchNews(provider.searchController.text);
                     },
-                  )
+                    icon: const Icon(Icons.manage_search_sharp),
+                  ),
                 ],
               ),
-            ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: CustomBottomNavBar(
-                currentIndexNavigation: _currentIndex,
-                onTap: (index) => setState(() {
-                  _currentIndex = index;
-                }),
-              ),
-            )
-            // Positioned(
-            //   left: 0,
-            //   right: 0,
-            //   bottom: 0,
-            //   child: CustomBottomNavBar()),
-          ],
+              _buildSearchResults(context),
+            ],
+          ),
         ),
+        // Align(
+        //   alignment: Alignment.bottomCenter,
+        //   child: CustomBottomNavBar(
+        //     currentIndexNavigation: _currentIndex,
+        //     onTap: (index) => setState(() {
+        //       _currentIndex = index;
+        //     }),
+        //   ),
+        // )
+        // Positioned(
+        //   left: 0,
+        //   right: 0,
+        //   bottom: 0,
+        //   child: CustomBottomNavBar()),
       ),
+      bottomNavigationBar: CustomBottomNavBar(
+        currentIndexNavigation: _currentIndex,
+        onTap: (index) => setState(() {
+          _currentIndex = index;
+        }),
+      ),
+    );
+  }
+
+  Widget _buildSearchResults(BuildContext context) {
+    final provider = Provider.of<ProviderSearchPage>(context);
+
+    return FutureBuilder<List<ModelSearchNews>>(
+      future: provider.searchNewsResult,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        } else if (snapshot.hasError) {
+          return Center(
+            child: Text('Error : ${snapshot.error}'),
+          );
+        } else if (snapshot.hasData) {
+          List<ModelSearchNews> searchNewsArticle = snapshot.data!;
+          return ListView.builder(
+            shrinkWrap: true,
+            physics: const ClampingScrollPhysics(),
+            itemCount: searchNewsArticle.length,
+            itemBuilder: (context, index) {
+              return CardSearchNews(searchNewsArticle[index]);
+            },
+          );
+        } else {
+          return const Center(
+            child: Text('No Data Available'),
+          );
+        }
+      },
     );
   }
 
