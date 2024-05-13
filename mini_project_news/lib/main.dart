@@ -6,7 +6,7 @@ import 'package:mini_project_news/provider/provider_home_page.dart';
 import 'package:mini_project_news/provider/provider_search_page.dart';
 import 'package:mini_project_news/provider/provider_view_all_news_page.dart';
 import 'package:mini_project_news/provider/provider_view_category_page.dart';
-import 'package:mini_project_news/view/splash_screen.dart';
+import 'package:mini_project_news/view/splash_page.dart';
 import 'package:mini_project_news/env/env.dart';
 import 'package:provider/provider.dart';
 
