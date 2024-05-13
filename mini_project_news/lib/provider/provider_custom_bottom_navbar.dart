@@ -26,10 +26,8 @@ class ProviderBottomNavBar extends ChangeNotifier {
         );
         break;
       case 2:
-        Navigator.push(
-          context,
-          // ignore: prefer_const_constructors
-          MaterialPageRoute(builder: (context) => ChatAIPage()),
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => const ChatAIPage()),
         );
         break;
     }
