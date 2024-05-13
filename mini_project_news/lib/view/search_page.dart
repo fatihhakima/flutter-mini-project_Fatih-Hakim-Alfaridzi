@@ -17,24 +17,6 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
-  // int _currentIndex = 1;
-  // final _searchNewsController = TextEditingController();
-  // final ServiceSearchNews _searchNewsService = ServiceSearchNews();
-  // late Future<List<ModelSearchNews>> _searchNewsFuture = Future.value([]);
-
-  // void _searchNews() async {
-  //   String searchText = _searchNewsController.text.trim().toLowerCase();
-  //   searchText = searchText.replaceAll(' ', '-');
-
-  //   if (searchText.isNotEmpty) {
-  //     try {
-  //       _searchNewsFuture = _searchNewsService.fetchSearchNews(searchText);
-  //       setState(() {});
-  //     } catch (e) {
-  //       print('Error Searching News: $e');
-  //     }
-  //   }
-  // }
 
   @override
   Widget build(BuildContext context) {

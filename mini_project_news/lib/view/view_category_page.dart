@@ -16,23 +16,6 @@ class ViewCategoryPage extends StatefulWidget {
 }
 
 class _ViewCategoryPageState extends State<ViewCategoryPage> {
-  // late Future<List<ModelNewsCategory>> _newsCategoryFuture;
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   _newsCategoryFuture =
-  //       _fetchNewsCategory(widget.category ?? ''.toLowerCase());
-  // }
-
-  // Future<List<ModelNewsCategory>> _fetchNewsCategory(String category) async {
-  //   try {
-  //     return await ServiceNewsCategory().fetchNewsCategory(category);
-  //   } catch (e) {
-  //     print('Error fetching news: $e');
-  //     throw Exception('Failed to fetch news');
-  //   }
-  // }
 
   @override
   Widget build(BuildContext context) {

@@ -13,66 +13,6 @@ class ChatAIPage extends StatefulWidget {
 }
 
 class _ChatAIPageState extends State<ChatAIPage> {
-  // List<ChatMessage> messages = [];
-
-  // ChatUser currentUser = ChatUser(
-  //   id: '0',
-  //   firstName: 'Hakim',
-  // );
-
-  // ChatUser geminiUser = ChatUser(
-  //   id: '1',
-  //   firstName: 'Gemini AI',
-  //   profileImage:
-  //       'https://eduparx.id/blog/wp-content/uploads/2024/05/gemini_ai_google_1701928139717.webp',
-  // );
-
-  // final Gemini gemini = Gemini.instance;
-
-  // void onSend(ChatMessage chatMessage) {
-  //   setState(() {
-  //     messages.insert(0, chatMessage);
-  //   });
-
-  //   try {
-  //     String question = chatMessage.text;
-  //     gemini.streamGenerateContent(question).listen(
-  //       (event) {
-  //         ChatMessage? lastMessage = messages.firstOrNull;
-  //         if (lastMessage != null && lastMessage.user == geminiUser) {
-  //           lastMessage = messages.removeAt(0);
-  //           print('halo ${messages}');
-  //           String response = event.content?.parts?.fold(
-  //                   '', (previousValue, element) => '$previousValue$element') ??
-  //               '';
-
-  //           lastMessage.text += response;
-  //           setState(() {
-  //             messages.insert(0, lastMessage!);
-  //           });
-  //         } else {
-  //           String response = event.content?.parts?.fold(
-  //                   '', (previousValue, element) => '$previousValue${element.text}') ??
-  //               '';
-
-  //           print('halo${response}');
-
-  //           ChatMessage message = ChatMessage(
-  //             user: geminiUser,
-  //             createdAt: DateTime.now(),
-  //             text: response,
-  //           );
-
-  //           setState(() {
-  //             messages.insert(0, message);
-  //           });
-  //         }
-  //       },
-  //     );
-  //   } catch (e) {
-  //     print(e);
-  //   }
-  // }
 
   @override
   Widget build(BuildContext context) {

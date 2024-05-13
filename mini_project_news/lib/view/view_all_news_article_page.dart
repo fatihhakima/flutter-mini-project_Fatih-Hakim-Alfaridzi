@@ -14,14 +14,6 @@ class ViewAllArticlesPage extends StatefulWidget {
 }
 
 class _ViewAllArticlesPageState extends State<ViewAllArticlesPage> {
-  // final ServiceNewsArticle _newsArticleService = ServiceNewsArticle();
-  // late Future<List<ModelNewsArticle>> _newsArticleFuture;
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   _newsArticleFuture = _newsArticleService.fetchNewsArticle();
-  // }
 
   @override
   Widget build(BuildContext context) {

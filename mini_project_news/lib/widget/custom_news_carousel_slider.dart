@@ -16,15 +16,6 @@ class CustomCarouselSlider extends StatefulWidget {
 }
 
 class _CustomCarouselSliderState extends State<CustomCarouselSlider> {
-  // final ServiceNewsSlider _newsSliderService = ServiceNewsSlider();
-  // late Future<List<ModelNewsSlider>> _newsSliderFuture;
-  // int activeIndexSlider = 0;
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   _newsSliderFuture = _newsSliderService.fetchNewsSlider();
-  // }
 
   @override
   Widget build(BuildContext context) {

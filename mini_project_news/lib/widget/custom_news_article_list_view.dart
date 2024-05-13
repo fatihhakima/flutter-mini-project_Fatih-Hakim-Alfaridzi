@@ -15,14 +15,6 @@ class CustomNewsArticleListView extends StatefulWidget {
 }
 
 class _CustomNewsArticleListViewState extends State<CustomNewsArticleListView> {
-  // final ServiceNewsArticle _newsArticleService = ServiceNewsArticle();
-  // late Future<List<ModelNewsArticle>> _newsArticleFuture;
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   _newsArticleFuture = _newsArticleService.fetchNewsArticle();
-  // }
 
   @override
   Widget build(BuildContext context) {

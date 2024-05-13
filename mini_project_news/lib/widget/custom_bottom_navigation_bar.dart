@@ -21,19 +21,6 @@ class CustomBottomNavBar extends StatefulWidget {
 }
 
 class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
-  // void _onItemTapped(int index) {
-  //    switch (index) {
-  //     case 0:
-  //      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const HomePage(),));
-  //      break;
-  //      case 1:
-  //      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const SearchPage(),));
-  //     break;
-  //      case 2:
-  //      Navigator.push(context, MaterialPageRoute(builder: (context) => ChatAIPage(),));
-  //     break;
-  //     }
-  // }
 
   @override
   Widget build(BuildContext context) {

@@ -14,13 +14,6 @@ class CustomCategory extends StatefulWidget {
 }
 
 class _CustomCategoryState extends State<CustomCategory> {
-  // List<CustomCategoryModel> categories = [];
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   categories = getCategories();
-  // }
 
   @override
   Widget build(BuildContext context) {
