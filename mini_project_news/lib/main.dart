@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gemini/flutter_gemini.dart';
 import 'package:mini_project_news/provider/provider_chat_ai_page.dart';
 import 'package:mini_project_news/provider/provider_custom_bottom_navbar.dart';
-// import 'package:mini_project_news/provider/provider_custom_bottom_navbar.dart';
 import 'package:mini_project_news/provider/provider_home_page.dart';
 import 'package:mini_project_news/provider/provider_search_page.dart';
 import 'package:mini_project_news/provider/provider_view_all_news_page.dart';
