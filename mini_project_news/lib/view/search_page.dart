@@ -96,7 +96,7 @@ class _SearchPageState extends State<SearchPage> {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(
-            child: CircularProgressIndicator(),
+            child: Padding(padding: EdgeInsets.only(top: 20), child: CircularProgressIndicator()),
           );
         } else if (snapshot.hasError) {
           return Center(
@@ -131,7 +131,7 @@ class _SearchPageState extends State<SearchPage> {
         ));
       },
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 0),
+        padding: const EdgeInsets.only(top: 10),
         child: Card(
           surfaceTintColor: Colors.white,
           elevation: 3,
